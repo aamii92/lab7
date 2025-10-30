@@ -1,0 +1,143 @@
+#include <iostream>
+#include <cstring> 
+#include <cmath> 
+
+using namespace std;
+
+class Shape {  // Эх класс
+public:  // Классын гишүүдийн тодорхойлолт
+   int x; // X координат
+   int y; // Y координат
+   char* name; // Объектын нэр
+};
+
+class TwoDShape : public Shape { // TwoDShape class
+public:  // Классын гишүүдийн тодорхойлолт
+   float r;  // Радиус эсвэл талын урт
+};
+
+class Circle : public TwoDShape { // Дугуй класс зарлалт
+public:
+   Circle(const char* n, float length, int xcoor, int ycoor) {  // Параметртэй байгуулагч функц зарлалт
+
+       cout << "Constructor of Circle is called" << endl;
+       name = new char[strlen(n) + 1];
+       strcpy(name, n);
+       r = length;
+       x = xcoor;
+       y = ycoor;
+   }
+
+   ~Circle() {  // Устгагч функц тодорхойлолт
+       delete[] name;
+       cout << "Destructor of Circle is called" << endl;
+   }
+
+   float CircleArea() { // Талбайг тооцох функц
+       return 3.14 * r * r;
+   }
+
+   float CirclePerimeter() { // Периметрийг тооцох функц
+       return 2 * 3.14 * r;
+   }
+};
+
+class Square : public TwoDShape {    // Квадрат класс зарлалт
+public:
+   int x1, y1;    // Баруун дээд цэгийн x,y координат
+   int x2, y2;    // Баруун доод цэгийн x,y координат
+   int x3, y3;    // Зүүн доод цэгийн x,y координат
+
+   Square(const char* n, float length, int xcoor, int ycoor) { // Параметртэй байгуулагч функц
+       cout << "Constructor of Square is called" << endl;
+       name = new char[strlen(n) + 1];
+       strcpy(name, n);
+       r = length;
+       x = xcoor;
+       y = ycoor;
+   }
+
+   ~Square() {  // Устгагч функц тодорхойлолт
+       delete[] name; 
+       cout << "Destructor of Square is called" << endl;
+   }
+
+   float SquareArea() { // Талбайг тооцох функц
+       return r * r;
+   }
+
+   float SquarePerimeter() { // Периметрийг тооцох функц
+       return 4 * r;
+   }
+
+   void CalculateOther() { // Бусад цэгүүдийн координатыг тооцох функц
+       x1 = x + r;
+       y1 = y;
+
+       x2 = x1;
+       y2 = y - r;
+
+       x3 = x;
+       y3 = y2;
+   }
+};
+
+class Triangle : public TwoDShape {  // Зөв гурвалжин класс зарлалт
+public:
+   int x1, y1; // Зүүн доод цэгийн x,y координат
+   int x2, y2; // Баруун доод цэгийн x,y координат
+
+   Triangle(const char* n, float length, int xcoor, int ycoor) {
+       cout << "Constructor of Triangle is called" << endl;
+       name = new char[strlen(n) + 1];
+       strcpy(name, n);
+       r = length;
+       x = xcoor;
+       y = ycoor;
+   }
+
+   ~Triangle() {
+       delete[] name;
+       cout << "Destructor of Triangle is called" << endl;
+   }
+
+   float TriangleArea() { // Талбай тооцох функц
+       return r * r * (sqrt(3) / 4);
+   }
+
+   float TrianglePerimeter() { // Периметрийг тооцох функц
+       return 4 * r;
+       return 3 * r;
+   }
+
+   void CalculateOther() {  // Бусад цэгүүдийн координатыг тооцох функц
+       x1 = x - (r / 2);
+       y1 = y - r;
+
+       x2 = x + (r / 2);
+       y2 = y - r;
+   }
+};
+
+int main() {
+   Circle a("Тойрог", 3, 0, 0);  //Circle class-ийн объект үүсгэх
+   Square b("Квадрат", 3, 5, 5);  //Square class-ийн объект үүсгэх
+   Triangle c("Зөв гурвалжин", 4, 10, 10);  //Triangle class-ийн объект үүсгэх
+
+   b.CalculateOther();
+   cout << b.name << ": " << b.r << "," << b.x << "," << b.y << endl;
+   cout << "Квадрат цэгүүд:" << endl;
+   cout << "(" << "Зүүн дээд цэг: "<< b.x << "," << b.y << ")" << endl;
+   cout << "(" << "Баруун дээд цэг: "<< b.x1 << "," << b.y1 << ")" << endl;
+   cout << "(" << "Баруун доод цэг: "<< b.x2 << "," << b.y2 << ")" << endl;
+   cout << "(" << "Зүүн доод цэг: "<< b.x3 << "," << b.y3 << ")" << endl;
+
+   c.CalculateOther();
+   cout << c.name << ": " << c.r << "," << c.x << "," << c.y << endl;
+   cout << "Зөв гурвалжин цэгүүд:" << endl;
+   cout << "(" << "Оройн цэг: "<< c.x << "," << c.y << ")" << endl;
+   cout << "(" << "Зүүн доод цэг: "<< c.x1 << "," << c.y1 << ")" << endl;
+   cout << "(" << "Баруун доод цэг: "<< c.x2 << "," << c.y2 << ")" << endl;
+
+   return 0; 
+}
