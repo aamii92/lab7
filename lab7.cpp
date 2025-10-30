@@ -108,13 +108,17 @@ int main() {
     cout<<t1.name<<"-> Талын урт:"<<t1.r<<endl;
     cout<<t2.name<<"-> Талын урт:"<<t2.r<<endl<<endl;
 
-    // Бүх дүрсүүдийг массивт хадгалж байна
-    TwoDShape* shapes[4] = { &c1, &c2, &s1, &t1 };
-    float areas[4] = { c1.Area(), c2.Area(), s1.Area(), t1.Area() };
+   // Бүх дүрсүүдийг массивт хадгалж эрэмбэлэгдээгүй талбайг хэвлэж байна
+    TwoDShape* shapes[6] = { &c1, &c2, &s1, &s2, &t1, &t2 };
+    float areas[6] = { c1.Area(), c2.Area(), s1.Area(), s2.Area(), t1.Area(), t2.Area() };
+        cout << "\n Эрэмбэлэгдээгүй талбай \n" << endl;
+    for (int i = 0; i < 6; i++) {
+        cout << shapes[i]->name << " -> Талбай = " << areas[i] << endl;
+    };
 
-    // Талбайгаар эрэмбэлэх ( bubble sort)
-    for (int i = 0; i < 4; i++) {
-        for (int j = i + 1; j < 4; j++) {
+    // Талбайгаар эрэмбэлэх (simple bubble sort)
+    for (int i = 0; i < 6; i++) {
+        for (int j = i + 1; j < 6; j++) {
             if (areas[i] > areas[j]) {
                 swap(areas[i], areas[j]);
                 swap(shapes[i], shapes[j]);
@@ -122,8 +126,9 @@ int main() {
         }
     }
 
-    cout << "\n--- Талбайгаар эрэмбэлсэн жагсаалт ---\n";
-    for (int i = 0; i < 4; i++) {
+    // Эрэмбэлэгдсэн талбайг хэвлэж байна
+    cout << "\n Талбайгаар эрэмбэлсэн жагсаалт \n";
+    for (int i = 0; i < 6; i++) {
         cout << shapes[i]->name << " -> Талбай = " << areas[i] << endl;
     }
 
