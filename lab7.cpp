@@ -85,10 +85,23 @@ public:
 };
 
 int main() {
+    // Дүрсүүдийг утга оноож байна
     Circle c1("Circle1", 3, 0, 0);
     Circle c2("Circle2", 5, 2, 2);
     Square s1("Square1", 4, 1, 1);
+    Square s2("Square2", 2, 6, 7);
     Triangle t1("Triangle1", 6, 2, 2);
+    Triangle t2("Triangle2", 4, 9, 2);
+ 
+ 
+    //Дүрсийн нэр болон талын уртыг хэвлэлт
+    cout<< "\n Өгөгдсөн мэдээлэл: \n"<<endl;
+    cout<<c1.name<<"-> Радиус:"<<c1.r<<endl;
+    cout<<c2.name<<"-> Радиус:"<<c2.r<<endl;
+    cout<<s1.name<<"-> Талын урт:"<<s1.r<<endl;
+    cout<<s2.name<<"-> Талын урт:"<<s2.r<<endl;
+    cout<<t1.name<<"-> Талын урт:"<<t1.r<<endl;
+    cout<<t2.name<<"-> Талын урт:"<<t2.r<<endl<<endl;
 
     // Бүх дүрсүүдийг массивт хадгалж байна
     TwoDShape* shapes[4] = { &c1, &c2, &s1, &t1 };
