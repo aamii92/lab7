@@ -25,11 +25,16 @@
             cout << "Destructor of Shape is called" <<" obekt: "<<number<<" is deleted "<<endl;
             number--;
         }
-        void show_number() {
+        // static гишүүн функцэд утга оноох функц
+        static void get_number(int m){
+            number = m;
+        }
+        // static гишүүн функцийн утгыг хэвлэх функц
+        static void show_number() {
         cout <<"Объектуудын тоо: " << number <<endl;
         }
     };
-    int Shape::number=0;
+    int Shape::number = 0;
     
     // TwoDShape классыг Shape-аас удамшуулж байна
     class TwoDShape : public Shape {
@@ -104,6 +109,7 @@
 
     // main функц
     int main() {
+        Shape::get_number(0);
         // Дүрсүүдийг утга оноож байна
         Circle c1("Circle1", 3, 0, 0);
         Circle c2("Circle2", 5, 2, 2);
@@ -122,7 +128,7 @@
         cout<<t1.name<<"-> Талын урт:"<<t1.r<<endl;
         cout<<t2.name<<"-> Талын урт:"<<t2.r<<endl<<endl;
     // static хувьсагчаар тоолсон объектуудын тоо
-    t2.show_number();
+    Shape::show_number();
     
     // Бүх дүрсүүдийг массивт хадгалж байна
     TwoDShape* shapes[6] = { &c1, &c2, &s1, &s2, &t1, &t2 };
