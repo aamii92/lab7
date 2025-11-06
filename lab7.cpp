@@ -1,7 +1,7 @@
 #include <iostream>
-    #include <cstring>
-    #include <cmath>
-    using namespace std;
+#include <cstring>
+#include <cmath>
+using namespace std;
 
     // Эх класс 
     class Shape {
@@ -89,43 +89,45 @@
         float Area() override { return (sqrt(3) / 4) * r * r; }
     };
 
-    // main функц
-    int main() {
-        // Дүрсүүдийг утга оноож байна
-        Circle c1("Circle1", 3, 0, 0);
-        Circle c2("Circle2", 5, 2, 2);
-        Square s1("Square1", 4, 1, 1);
-        Square s2("Square2", 2, 6, 7);
-        Triangle t1("Triangle1", 6, 2, 2);
-        Triangle t2("Triangle2", 4, 9, 2);
-    
-    
-        //Дүрсийн нэр болон талын уртыг хэвлэлт
-        cout<< "\n Өгөгдсөн мэдээлэл: \n"<<endl;
-        cout<<c1.name<<"-> Радиус:"<<c1.r<<endl;
-        cout<<c2.name<<"-> Радиус:"<<c2.r<<endl;
-        cout<<s1.name<<"-> Талын урт:"<<s1.r<<endl;
-        cout<<s2.name<<"-> Талын урт:"<<s2.r<<endl;
-        cout<<t1.name<<"-> Талын урт:"<<t1.r<<endl;
-        cout<<t2.name<<"-> Талын урт:"<<t2.r<<endl<<endl;
-
+// main функц
+int main() {
+    // Дүрсүүдийг утга оноож байна
+    Circle c1("Circle1", 3, 0, 0);
+    Circle c2("Circle2", 5, 2, 2);
+    Square s1("Square1", 4, 1, 1);
+    Square s2("Square2", 2, 6, 7);
+    Triangle t1("Triangle1", 6, 2, 2);
+    Triangle t2("Triangle2", 4, 9, 2);
+ 
+ 
+    //Дүрсийн нэр болон талын уртыг хэвлэлт
+    cout<< "\n Өгөгдсөн мэдээлэл: \n"<<endl;
+    cout<<c1.name<<"-> Радиус:"<<c1.r<<endl;
+    cout<<c2.name<<"-> Радиус:"<<c2.r<<endl;
+    cout<<s1.name<<"-> Талын урт:"<<s1.r<<endl;
+    cout<<s2.name<<"-> Талын урт:"<<s2.r<<endl;
+    cout<<t1.name<<"-> Талын урт:"<<t1.r<<endl;
+    cout<<t2.name<<"-> Талын урт:"<<t2.r<<endl<<endl;
 
     // Бүх дүрсүүдийг массивт хадгалж байна
-    TwoDShape* shapes[6] = { &c1, &c2, &s1, &s2, &t1, &t2 };
-
+    TwoDShape* shapes[4] = { &c1, &c2, &s1, &t1 };
+    float areas[4] = { c1.Area(), c2.Area(), s1.Area(), t1.Area() };
 
     // Талбайгаар эрэмбэлэх ( bubble sort)
-    for (int i = 0; i < 6; i++) {
-        for (int j = i + 1; j < 6; j++) {
-                if (shapes[i]->Area() > shapes[j]->Area()) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 4; j++) {
+            if (areas[i] > areas[j]) {
+                swap(areas[i], areas[j]);
                 swap(shapes[i], shapes[j]);
             }
         }
     }
 
-    cout << "\n--- Талбайгаар эрэмбэлсэн жагсаалт \n";
-    for (int i = 0; i < 6; i++) {
-        cout << shapes[i]->name << " -> Талбай = " << shapes[i]->Area() << endl;
+    cout << "\n--- Талбайгаар эрэмбэлсэн жагсаалт ---\n";
+    for (int i = 0; i < 4; i++) {
+        cout << shapes[i]->name << " -> Талбай = " << areas[i] << endl;
     }
 
-    }
+    cout << endl;
+    return 0;
+}
