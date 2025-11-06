@@ -10,12 +10,12 @@
         char* name;
         static int number;
         // Эх классын параметртэй байгуулагч
-        Shape(const char* n, int xcoor, int ycoor) {
+        Shape(const char* name, int x, int y) {
             cout << "Constructor of Shape is called" << endl;
-            name = new char[strlen(n) + 1];
-            strcpy(name, n);
-            x = xcoor;
-            y = ycoor;
+            this->name = new char[strlen(name) + 1];
+            strcpy(this->name, name);
+            this->x = x;
+            this->y = y;
             number++;
         }
 
@@ -42,10 +42,10 @@
         float r;
 
         // TwoDShape-ийн параметртэй байгуулагч — Shape-ийг дуудаж байна
-        TwoDShape(const char* n, float length, int xcoor, int ycoor)
-            : Shape(n, xcoor, ycoor) {
+        TwoDShape(const char* name, float r, int x, int y)
+            : Shape(name, x, y) {
             cout << "Constructor of TwoDShape is called" << endl;
-            r = length;
+            this->r = r;
         }
         // TwoDShape классын устгагч
         ~TwoDShape() {
@@ -53,6 +53,14 @@
         }
         virtual float Area() = 0;
         virtual float Perimetr() = 0;
+        void print() {
+        cout << this->name << " -> Радиус: " << this->r << endl;
+        }
+ 
+        void show() {
+        cout << "\nДотор функцээс дуудав: " << endl;
+        //  this ашиглан өөрийнхөө print() функцийг дуудаж байна
+        }
     };
     
 
@@ -60,8 +68,8 @@
     class Circle : public TwoDShape {
     public:
         // Circle классын параметртэй байгуулагч — TwoDShape-ийг дуудаж байна
-        Circle(const char* n, float length, int xcoor, int ycoor)
-            : TwoDShape(n, length, xcoor, ycoor) {
+        Circle(const char* name, float r, int x, int y)
+            : TwoDShape(name, r, x, y) {
             cout << "Constructor of Circle is called" << endl;
         }
         // Circle классын устгагч
@@ -77,8 +85,8 @@
     class Square : public TwoDShape {
     public:
         // Square классын параметртэй байгуулагч — TwoDShape-ийг дуудаж байна
-        Square(const char* n, float length, int xcoor, int ycoor)
-            : TwoDShape(n, length, xcoor, ycoor) {
+        Square(const char* name, float r, int x, int y)
+            : TwoDShape(name, r, x, y) {
             cout << "Constructor of Square is called" << endl;
         }
         // Square классын устгагч
@@ -160,6 +168,9 @@
     for (int i = 0; i < 6; i++) {
         cout << shapes[i]->name << " -> Периметр = " << shapes[i]->Perimetr() << endl;
     }
-
+    for (int i = 0; i < 6; i++) {
+        shapes[i]->show();
+        cout << endl;
+    }
 
     }
