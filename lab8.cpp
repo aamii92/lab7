@@ -103,8 +103,8 @@
     class Triangle : public TwoDShape {
     public:
     // Square классын параметртэй байгуулагч — TwoDShape-ийг дуудаж байна
-        Triangle(const char* n, float length, int xcoor, int ycoor)
-            : TwoDShape(n, length, xcoor, ycoor) {
+        Triangle(const char* name, float r, int x, int y)
+            : TwoDShape(name, r, x, y) {
             cout << "Constructor of Triangle is called" << endl;
         }
         // Triangle классын устгагч
